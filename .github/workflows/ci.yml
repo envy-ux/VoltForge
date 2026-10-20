@@ -29,7 +29,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
+          # No pip cache: this lightweight repository has no requirements.txt
+          # or pyproject.toml dependency manifest for setup-python to hash.
       - name: Install runtime dependencies
         run: |
           python -m pip install --upgrade pip
