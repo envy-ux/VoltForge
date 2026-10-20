@@ -1,18 +1,38 @@
-# VoltForge — Battery Simulation Workspace
+<p align="center">
+  <img src="assets/voltforge-logo.svg" alt="VoltForge — Battery Simulation Workspace" width="720" />
+</p>
 
-VoltForge is a research-oriented workspace for running and exploring electrochemical battery simulations with Python and [PyBaMM](https://github.com/pybamm-team/PyBaMM).
+<p align="center">
+  <strong>Explore battery behaviour with physics-based models, numerical solvers, and reproducible experiments.</strong>
+</p>
 
-> **Attribution:** VoltForge is a downstream-branded project based on the PyBaMM ecosystem. The internal Python package remains `pybamm`. Upstream notices, licenses and citations must be preserved; this project is not affiliated with or endorsed by the PyBaMM team.
+<p align="center">
+  <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" />
+  <img alt="License BSD 3-Clause" src="https://img.shields.io/badge/License-BSD--3--Clause-2F855A" />
+  <img alt="Domain Battery simulation" src="https://img.shields.io/badge/Domain-Battery%20Simulation-0F766E" />
+  <img alt="Research software" src="https://img.shields.io/badge/Focus-Scientific%20Computing-475569" />
+</p>
+
+VoltForge is a research-oriented workspace for exploring electrochemical battery simulations with Python and [PyBaMM](https://github.com/pybamm-team/PyBaMM). The included quickstart uses a lithium-ion Single Particle Model (SPM) to produce reproducible voltage data and a plot.
+
+> **Attribution:** VoltForge is a downstream-branded project based on the PyBaMM ecosystem. The internal Python package remains `pybamm`. Upstream notices, licenses and citations must be preserved; this project is not affiliated with or endorsed by the PyBaMM team. Read [UPSTREAM_NOTICE.md](UPSTREAM_NOTICE.md) before redistribution.
+
+## Simulation workflow
+
+<p align="center">
+  <img src="assets/architecture.svg" alt="VoltForge simulation workflow: define a study, formulate a model, solve it, and interpret results" width="100%" />
+</p>
 
 ## What is included in this repository
 
-- A runnable lithium-ion discharge quickstart using the Single Particle Model (SPM).
+- A runnable lithium-ion discharge quickstart based on the SPM.
 - CSV export of simulated terminal voltage.
 - Optional voltage-curve plotting.
 - A GitHub Actions smoke test for the quickstart.
+- A custom VoltForge logo and simulation workflow diagram.
 - The retained upstream BSD license notice.
 
-**Repository sync note:** The full source bundle includes the broader PyBaMM monorepo (packages, notebooks, documentation and examples). Those thousands of source files have not yet been mirrored into this GitHub repository; the current online version is the lightweight quickstart scaffold. See the upstream source repository and installation docs for the complete project until the full bundle is pushed.
+**Repository sync note:** The full prepared source bundle includes the broader PyBaMM monorepo (packages, notebooks, documentation and examples). Those thousands of source files have **not yet been mirrored** into this GitHub repository; the current online version is the lightweight quickstart scaffold. The download bundle is ready locally, but a full source-tree push is still needed for the repository to contain every file.
 
 ## Quick start
 
@@ -58,6 +78,23 @@ python examples/scripts/voltforge_quickstart.py --help
 ```
 
 This is a software smoke test using PyBaMM's built-in SPM and default parameter set, not a calibrated prediction for a particular commercial cell. For engineering conclusions, select appropriate parameters, validate against experimental data, and evaluate model assumptions and uncertainty.
+
+## Repository contents currently published
+
+```text
+VoltForge/
+├── .github/workflows/ci.yml
+├── assets/
+│   ├── architecture.svg
+│   └── voltforge-logo.svg
+├── examples/scripts/voltforge_quickstart.py
+├── LICENSE.txt
+├── UPSTREAM_NOTICE.md
+├── .gitignore
+└── README.md
+```
+
+The full source archive also contains PyBaMM packages, native-solver bindings, tests, docs and extensive notebooks. Since the archive came as a ZIP, it preserves `.gitmodules` but not the original SUNDIALS and SuiteSparse submodule commit pointers. A complete native source build therefore requires a proper source checkout with valid pinned submodules. The quickstart above intentionally uses the published PyBaMM distribution and does not require that native source checkout.
 
 ## Development and CI
 
