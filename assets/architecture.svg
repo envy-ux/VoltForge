@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="330" viewBox="0 0 1120 330" role="img" aria-labelledby="title desc">
+  <title id="title">VoltForge simulation workflow</title>
+  <desc id="desc">Battery assumptions and operating profile feed a physics-based battery model, which is discretized and solved to produce voltage, current, temperature, and degradation outputs.</desc>
+  <rect x="1" y="1" width="1118" height="328" rx="22" fill="#0B1220" stroke="#243449" stroke-width="2"/>
+  <text x="34" y="42" fill="#F8FAFC" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="20" font-weight="700">From assumptions to interpretable battery behaviour</text>
+  <g font-family="Inter,Segoe UI,Arial,sans-serif">
+    <rect x="34" y="82" width="224" height="174" rx="16" fill="#111E31" stroke="#3B526D" stroke-width="1.5"/>
+    <text x="56" y="115" fill="#7DD3FC" font-size="13" font-weight="700" letter-spacing="1.5">01 · DEFINE</text>
+    <text x="56" y="146" fill="#F8FAFC" font-size="20" font-weight="700">Study inputs</text>
+    <text x="56" y="177" fill="#C7D3E2" font-size="14">Cell parameters</text>
+    <text x="56" y="201" fill="#C7D3E2" font-size="14">Current / experiment</text>
+    <text x="56" y="225" fill="#C7D3E2" font-size="14">Initial conditions</text>
+    <path d="M266 169h42" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round"/>
+    <path d="M299 161l9 8-9 8" fill="none" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="318" y="82" width="224" height="174" rx="16" fill="#111E31" stroke="#3B526D" stroke-width="1.5"/>
+    <text x="340" y="115" fill="#7DD3FC" font-size="13" font-weight="700" letter-spacing="1.5">02 · FORMULATE</text>
+    <text x="340" y="146" fill="#F8FAFC" font-size="20" font-weight="700">Battery model</text>
+    <text x="340" y="177" fill="#C7D3E2" font-size="14">SPM / SPMe / DFN</text>
+    <text x="340" y="201" fill="#C7D3E2" font-size="14">Physics &amp; submodels</text>
+    <text x="340" y="225" fill="#C7D3E2" font-size="14">Parameter sets</text>
+    <path d="M550 169h42" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round"/>
+    <path d="M583 161l9 8-9 8" fill="none" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="602" y="82" width="224" height="174" rx="16" fill="#111E31" stroke="#3B526D" stroke-width="1.5"/>
+    <text x="624" y="115" fill="#7DD3FC" font-size="13" font-weight="700" letter-spacing="1.5">03 · SOLVE</text>
+    <text x="624" y="146" fill="#F8FAFC" font-size="20" font-weight="700">Numerical engine</text>
+    <text x="624" y="177" fill="#C7D3E2" font-size="14">Discretisation</text>
+    <text x="624" y="201" fill="#C7D3E2" font-size="14">ODE / DAE solvers</text>
+    <text x="624" y="225" fill="#C7D3E2" font-size="14">Time-series solution</text>
+    <path d="M834 169h42" stroke="#FBBF24" stroke-width="3" stroke-linecap="round"/>
+    <path d="M867 161l9 8-9 8" fill="none" stroke="#FBBF24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="886" y="82" width="200" height="174" rx="16" fill="#172A28" stroke="#4B8B78" stroke-width="1.5"/>
+    <text x="908" y="115" fill="#86EFAC" font-size="13" font-weight="700" letter-spacing="1.5">04 · INTERPRET</text>
+    <text x="908" y="146" fill="#F8FAFC" font-size="20" font-weight="700">Outputs</text>
+    <text x="908" y="177" fill="#D1E5DD" font-size="14">Voltage &amp; current</text>
+    <text x="908" y="201" fill="#D1E5DD" font-size="14">Temperature / SOC</text>
+    <text x="908" y="225" fill="#D1E5DD" font-size="14">Plots &amp; data exports</text>
+  </g>
+  <text x="35" y="296" fill="#91A4BB" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13">Conceptual architecture · detailed components and solver options depend on the selected model.</text>
+</svg>
