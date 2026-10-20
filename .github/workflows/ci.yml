@@ -1,0 +1,63 @@
+name: VoltForge CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+concurrency:
+  group: voltforge-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYBAMM_DISABLE_TELEMETRY: "true"
+  MPLBACKEND: Agg
+
+jobs:
+  quickstart-smoke-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pybamm[plot]"
+      - name: Compile the example
+        run: python -m py_compile examples/scripts/voltforge_quickstart.py
+      - name: Run the quickstart
+        run: python examples/scripts/voltforge_quickstart.py --hours 0.25 --samples 25 --output-dir artifacts/quickstart
+      - name: Validate generated outputs
+        run: |
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          output = Path("artifacts/quickstart")
+          csv_path = output / "discharge_voltage.csv"
+          plot_path = output / "discharge_voltage.png"
+          assert csv_path.is_file(), f"Missing {csv_path}"
+          assert plot_path.is_file(), f"Missing {plot_path}"
+          with csv_path.open(newline="", encoding="utf-8") as stream:
+              rows = list(csv.DictReader(stream))
+          assert len(rows) == 25, f"Expected 25 rows, got {len(rows)}"
+          assert all(float(row["voltage_v"]) > 0 for row in rows)
+          print(f"Validated {len(rows)} voltage samples")
+          PY
+      - name: Upload quickstart artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: voltforge-quickstart-results
+          path: artifacts/quickstart/
+          if-no-files-found: error
+          retention-days: 7
