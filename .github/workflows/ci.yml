@@ -43,17 +43,31 @@ jobs:
         run: |
           python - <<'PY'
           import csv
+          import math
           from pathlib import Path
+
           output = Path("artifacts/quickstart")
           csv_path = output / "discharge_voltage.csv"
           plot_path = output / "discharge_voltage.png"
           assert csv_path.is_file(), f"Missing {csv_path}"
           assert plot_path.is_file(), f"Missing {plot_path}"
+
           with csv_path.open(newline="", encoding="utf-8") as stream:
               rows = list(csv.DictReader(stream))
-          assert len(rows) == 25, f"Expected 25 rows, got {len(rows)}"
-          assert all(float(row["voltage_v"]) > 0 for row in rows)
-          print(f"Validated {len(rows)} voltage samples")
+
+          # PyBaMM's solver may include adaptive internal time points in addition
+          # to the requested t_eval values. Validate the series, not exact length.
+          assert len(rows) >= 25, f"Expected at least 25 time points, got {len(rows)}"
+          times = [float(row["time_s"]) for row in rows]
+          voltages = [float(row["voltage_v"]) for row in rows]
+          assert all(math.isfinite(t) for t in times), "Time series contains non-finite values"
+          assert all(math.isfinite(v) and v > 0 for v in voltages), "Voltage contains invalid values"
+          assert all(b > a for a, b in zip(times, times[1:])), "Time values must increase strictly"
+          expected_end_s = 0.25 * 3600
+          assert math.isclose(times[-1], expected_end_s, rel_tol=0, abs_tol=1e-3), (
+              f"Simulation ended at {times[-1]} s, expected {expected_end_s} s"
+          )
+          print(f"Validated {len(rows)} time points over {times[-1]:.1f} seconds")
           PY
       - name: Upload quickstart artifacts
         uses: actions/upload-artifact@v4
